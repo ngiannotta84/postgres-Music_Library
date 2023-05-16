@@ -10,11 +10,10 @@ This is a work-in-progress web application designed to manage a music library.
 
 The app is built using the following technologies:
 
-## JavaScript
-
-Express
-Docker
-pgAdmin 4
+Java-Script /
+Express /
+Docker /
+pgAdmin 4 /
 Mocha
 
 ## Set Up
@@ -30,6 +29,6 @@ This is a basic version of the app and will be updated with more features and fu
 
 ## Contributors:
 
-** - Nicola Giannotta **
+**- Nicola Giannotta ** 
 
 Feel free to fork the repository and contribute to the project.
