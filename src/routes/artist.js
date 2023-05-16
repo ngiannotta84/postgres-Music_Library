@@ -4,6 +4,7 @@ const artistController= require ('../controllers/artist')
  
 router
   .post("/", artistController.createArtist)
-  .get("/",artistController.readArtist)
+  .get("/",artistController.readAllArtists)
+  .get("/:id",artistController.readArtistById)
 
   module.exports = router;
