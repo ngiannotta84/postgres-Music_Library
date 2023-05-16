@@ -5,9 +5,9 @@ const createArtist = async (req, res) => {
 
   try {
     const {
-      rows: [artist],
+      rows: [artist]
     } = await db.query(
-      `INSERT INTO Artists (name, genre) VALUES ('${name}','${genre}') RETURNING *`
+      'INSERT INTO Artists (name, genre) VALUES ($1, $2) RETURNING *', [name, genre]
     );
     res.status(201).json(artist);
   } catch (err) {
