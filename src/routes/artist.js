@@ -6,5 +6,6 @@ router
   .post("/", artistController.createArtist)
   .get("/",artistController.readAllArtists)
   .get("/:id",artistController.readArtistById)
+  .put("/:id",artistController.putArtist)
 
   module.exports = router;
