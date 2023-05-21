@@ -73,6 +73,20 @@ const patchArtist = async (req, res) => {
     res.status(500).json(err.message)
   }
 }
+ const deleteArtist = async (req,res) => {
+  try {
+    const { id } = req.params
+    const { rows } = await db.query (`DELETE * FROM Artist WHERE id=$1 RETURNING *`, [id]);
+   if (rows.length === 0) {
+    res.status(404).json({message:`artist ${id} does not exist`})
+   } else {
+    const foundDeletedArtist = rows[0]
+    res.status(200).json(foundDeletedArtist)
+   } 
+  } catch(err){
+    res.status(500).json(err.message)
+   }
+ };
 
 
-module.exports = {createArtist, readAllArtists, readArtistById, patchArtist};
+module.exports = {createArtist, readAllArtists, readArtistById, patchArtist, deleteArtist};

@@ -7,5 +7,6 @@ router
   .get("/",artistController.readAllArtists)
   .get("/:id",artistController.readArtistById)
   .patch("/:id",artistController.patchArtist)
+  .delete("/:id",artistController.deleteArtist)
 
   module.exports = router;
