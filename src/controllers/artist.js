@@ -19,7 +19,7 @@ const readAllArtists =  async (_, res) => {
     const {
       rows
     } = await db.query(
-      'SELECT * FROM Artists'
+      'SELECT * FROM Artists ORDER BY id ASC'
     );
     res.status(200).json(rows);
   } catch (err) {
@@ -42,12 +42,26 @@ const readArtistById = async (req, res) => {
   }
 }
 
-const putArtist = async (req, res) => {
+const patchArtist = async (req, res) => {
   const { id } = req.params
   const { name, genre } = req.body
 
+  let text,params
+
+
+  if (name, genre) {
+    text= 'UPDATE Artists SET name = $1, genre = $2 WHERE id = $3 RETURNING *';
+    params= [name,genre,id];
+  } else if (name) {
+    text= 'UPDATE Artists SET name = $1, WHERE id = $2 RETURNING *';
+    params=[name,id];
+  } else if (genre) {
+    text='UPDATE Artists SET genre = $1 WHERE id = $2 RETURNING *';
+    params=[genre,id];
+  }
+
   try {
-    const { rows: [ artist ] } = await db.query('UPDATE Artists SET name = $1, genre = $2 WHERE id = $3 RETURNING *', [ name, genre, id ])
+    const { rows: [ artist ] } = await db.query(text,params,[name,genre,id])
 
     if (!artist) {
       return res.status(404).json({ message: `artist ${id} does not exist` })
@@ -61,4 +75,4 @@ const putArtist = async (req, res) => {
 }
 
 
-module.exports = {createArtist, readAllArtists, readArtistById, putArtist};
+module.exports = {createArtist, readAllArtists, readArtistById, patchArtist};
